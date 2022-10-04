@@ -1,5 +1,3 @@
-import { greetUser } from '$utils/greet';
-
 window.Webflow ||= [];
 window.Webflow.push(() => {
   const placeholder = document.querySelector('[time-to-close]');
@@ -25,6 +23,7 @@ window.Webflow.push(() => {
       placeholder.innerHTML = ``;
     }
   }
-  // setInterval(refresh, 1);
+
   document.addEventListener('DOMContentLoaded', refresh);
+  setInterval(refresh, 1);
 });
