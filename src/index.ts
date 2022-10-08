@@ -1,29 +1,51 @@
 window.Webflow ||= [];
 window.Webflow.push(() => {
   const placeholder = document.querySelector('[time-to-close]');
-  const closing1 = 19;
-  const closing2 = 18;
+  const start = new Date();
+  const day: number = start.getDay();
 
-  const day: number = new Date().getDay();
-  const time: number = new Date().getHours();
+  function tick() {
+    const now = new Date();
+    let diff = 0;
+    let string = ``;
 
-  function refresh() {
-    let toclose = 0;
-    if (day === 6 || day === 7) {
-      toclose = closing2 - time;
+    function hhmm(n: number) {
+      return [
+        Math.floor((n / 1000 / 60 / 60) % 60),
+        Math.floor((n / 1000 / 60) % 60),
+        Math.round((n / 1000) % 60),
+      ];
     }
-    toclose = closing1 - time;
+
+    function str(num: number) {
+      const closingTime = start.setHours(num, 0, 0);
+      diff = closingTime - now;
+      if ((diff / 1000 / 60 / 60) % 60 < 1) {
+        string = `${hhmm(diff)[1]} minuter`;
+      } else if ((diff / 1000 / 60 / 60) % 60 < 2) {
+        string = `${hhmm(diff)[0]} time ${hhmm(diff)[1]} minuter`;
+      } else {
+        string = `${hhmm(diff)[0]} timer ${hhmm(diff)[1]} minuter`;
+      }
+    }
+
+    if (day === 6 || day === 7) {
+      str(18);
+    } else {
+      str(19);
+    }
 
     if (!placeholder) {
       return;
     }
-    if (toclose < 6) {
-      placeholder.innerHTML = `There is ${toclose} hours left to close!`;
-    } else {
-      placeholder.innerHTML = ``;
-    }
-  }
+    placeholder.classList.remove('hidden');
+    placeholder.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
+    // if ((diff / 1000 / 60 / 60) % 60 < 2) {
+    //   placeholder.classList.remove('hidden');
+    //   placeholder.innerHTML = `${string} to close!`;
+    // }
 
-  document.addEventListener('DOMContentLoaded', refresh);
-  setInterval(refresh, 1);
+    setTimeout(tick, 1000);
+  }
+  tick();
 });
