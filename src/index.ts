@@ -7,6 +7,7 @@ window.Webflow.push(() => {
   function tick() {
     const now = new Date();
     let diff = 0;
+    let factor = 0;
     let string = ``;
 
     function hhmm(n: number) {
@@ -20,13 +21,18 @@ window.Webflow.push(() => {
     function str(num: number) {
       const closingTime = start.setHours(num, 0, 0);
       diff = closingTime - now;
-      if ((diff / 1000 / 60 / 60) % 60 < 1) {
+      factor = (diff / 1000 / 60 / 60) % 60;
+      if (factor < 1) {
         string = `${hhmm(diff)[1]} minuter`;
-      } else if ((diff / 1000 / 60 / 60) % 60 < 2) {
+      } else if (factor < 2) {
         string = `${hhmm(diff)[0]} time ${hhmm(diff)[1]} minuter`;
       } else {
         string = `${hhmm(diff)[0]} timer ${hhmm(diff)[1]} minuter`;
       }
+    }
+
+    if (!placeholder) {
+      return;
     }
 
     if (day === 6 || day === 7) {
@@ -35,17 +41,12 @@ window.Webflow.push(() => {
       str(19);
     }
 
-    if (!placeholder) {
-      return;
+    if (factor > 0 && factor < 2) {
+      placeholder.classList.remove('hidden');
+      placeholder.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
     }
-    placeholder.classList.remove('hidden');
-    placeholder.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
-    // if ((diff / 1000 / 60 / 60) % 60 < 2) {
-    //   placeholder.classList.remove('hidden');
-    //   placeholder.innerHTML = `${string} to close!`;
-    // }
 
-    setTimeout(tick, 1000);
+    setTimeout(tick, 60000);
   }
   tick();
 });
