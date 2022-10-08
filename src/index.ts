@@ -36,7 +36,7 @@ window.Webflow.push(() => {
     }
 
     if (day === 6 || day === 7) {
-      str(22);
+      str(21);
     } else {
       str(19);
     }
