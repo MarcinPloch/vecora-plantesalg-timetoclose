@@ -12,7 +12,7 @@ export const greetUser = (name: string) => {
   console.log(
     `This site was last published on ${publishDate?.toLocaleDateString('en-US', {
       year: 'numeric',
-      month: 'long',
+      month: 'long ',
       day: '2-digit',
     })}.`
   );
