@@ -36,12 +36,12 @@ window.Webflow.push(() => {
     }
 
     if (day === 6 || day === 7) {
-      str(21);
+      str(18);
     } else {
       str(19);
     }
 
-    if (factor > 0 && factor < 2) {
+    if (factor > 0 && factor < 4) {
       placeholder.classList.remove('hidden');
       placeholder.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
     }
