@@ -41,12 +41,12 @@ window.Webflow.push(() => {
       str(19);
     }
 
-    if (factor > 0 && factor < 4) {
+    if (factor > 0 && factor < 3) {
       placeholder.classList.remove('hidden');
       placeholder.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
     }
 
-    setTimeout(tick, 60000);
+    setTimeout(tick, 1000);
   }
   tick();
 });
