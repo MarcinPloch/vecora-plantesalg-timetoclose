@@ -1,6 +1,6 @@
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  const placeholder = document.querySelector('[time-to-close]');
+  const placeholders = document.querySelectorAll('[time-to-close]');
   const start = new Date();
   const day: number = start.getDay();
 
@@ -22,7 +22,7 @@ window.Webflow.push(() => {
       const closingTime = start.setHours(num, 0, 0);
       diff = closingTime - now;
       factor = (diff / 1000 / 60 / 60) % 60;
-      if (factor < 1) {
+      if (factor <= 1) {
         string = `${hhmm(diff)[1]} minuter`;
       } else if (factor < 2) {
         string = `${hhmm(diff)[0]} time ${hhmm(diff)[1]} minuter`;
@@ -31,7 +31,7 @@ window.Webflow.push(() => {
       }
     }
 
-    if (!placeholder) {
+    if (!placeholders) {
       return;
     }
 
@@ -41,9 +41,11 @@ window.Webflow.push(() => {
       str(19);
     }
 
-    if (factor > 0 && factor < 3) {
-      placeholder.classList.remove('hidden');
-      placeholder.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
+    if (factor > 0 && factor < 4) {
+      placeholders.forEach((item) => {
+        item.classList.remove('hidden');
+        item.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
+      });
     }
 
     setTimeout(tick, 1000);
