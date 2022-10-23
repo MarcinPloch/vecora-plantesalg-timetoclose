@@ -22,7 +22,7 @@ window.Webflow.push(() => {
       const closingTime = start.setHours(num, 0, 0);
       diff = closingTime - now;
       factor = (diff / 1000 / 60 / 60) % 60;
-      if (factor <= 1.17) {
+      if (factor <= 1) {
         string = `${hhmm(diff)[1]} minuter`;
       } else if (factor > 1 && factor < 2) {
         string = `${hhmm(diff)[0]} time ${hhmm(diff)[1]} minuter`;
@@ -36,7 +36,7 @@ window.Webflow.push(() => {
     }
 
     if (day === 6 || day === 7) {
-      str(22);
+      str(18);
     } else {
       str(19);
     }
@@ -44,7 +44,7 @@ window.Webflow.push(() => {
     if (factor > 0 && factor < 5) {
       document.querySelector('.time-to-close-wrapper')?.classList.remove('hidden');
       placeholders.forEach((item) => {
-        item.innerHTML = `Plantesalget er åpent. ${string} til stengetid. --- ${factor}`;
+        item.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
       });
     }
 
