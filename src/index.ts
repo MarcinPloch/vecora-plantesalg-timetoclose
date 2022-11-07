@@ -44,7 +44,7 @@ window.Webflow.push(() => {
     if (factor > 0 && factor < 20) {
       document.querySelector('.time-to-close-wrapper')?.classList.remove('hidden');
       placeholders.forEach((item) => {
-        item.innerHTML = `Plantesalget er åpent. ${string} til stengetid. ${now}`;
+        item.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
       });
     }
 
