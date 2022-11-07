@@ -44,11 +44,11 @@ window.Webflow.push(() => {
     if (factor > 0 && factor < 5) {
       document.querySelector('.time-to-close-wrapper')?.classList.remove('hidden');
       placeholders.forEach((item) => {
-        item.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
+        item.innerHTML = `Plantesalget er åpent. ${string} til stengetid. ${now}`;
       });
     }
 
-    setTimeout(tick, 1000);
+    setTimeout(tick, 60000);
   }
   tick();
 });
