@@ -47,7 +47,6 @@ window.Webflow.push(() => {
         item.innerHTML = `Plantesalget er åpent. ${string} til stengetid.`;
       });
     }
-
     setTimeout(tick, 1000);
   }
   tick();
